@@ -1,0 +1,125 @@
+
+/* Fundo principal do aplicativo */
+ion-content {
+  --background: #f3f7fc;
+}
+
+/* Barra superior */
+ion-toolbar {
+  --background: #174a7e;
+  --color: #ffffff;
+  --min-height: 60px;
+}
+
+ion-title {
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Título principal */
+h1 {
+  color: #174a7e;
+  font-size: 26px;
+  font-weight: 700;
+  text-align: center;
+  margin-top: 25px;
+  margin-bottom: 10px;
+}
+
+/* Descrição */
+ion-content > p {
+  color: #64748b;
+  font-size: 15px;
+  text-align: center;
+  margin-bottom: 22px;
+}
+
+/* Títulos das seções */
+h2 {
+  color: #174a7e;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 28px;
+  margin-bottom: 14px;
+}
+
+/* Cartões */
+ion-card {
+  --background: #ffffff;
+  border-radius: 16px;
+  margin: 16px 0;
+  box-shadow: 0 4px 15px rgba(23, 74, 126, 0.09);
+}
+
+/* Títulos dos cartões */
+ion-card-title {
+  color: #174a7e;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+/* Informações das tarefas */
+ion-card-subtitle {
+  color: #64748b;
+  font-size: 13px;
+  margin-top: 8px;
+}
+
+/* Conteúdo dos cartões */
+ion-card-content {
+  color: #334155;
+  font-size: 14px;
+}
+
+/* Botões */
+ion-button {
+  --border-radius: 10px;
+  font-weight: 600;
+  text-transform: none;
+  margin-top: 10px;
+}
+
+/* Botão principal */
+ion-button[color="primary"] {
+  --ion-color-primary: #174a7e;
+  --ion-color-primary-contrast: #ffffff;
+}
+
+/* Campos do formulário */
+ion-input,
+ion-select {
+  margin-top: 12px;
+  margin-bottom: 12px;
+  --highlight-color-focused: #174a7e;
+}
+
+/* Barra de pesquisa */
+ion-searchbar {
+  --background: #ffffff;
+  --color: #1e293b;
+  --placeholder-color: #94a3b8;
+  --icon-color: #174a7e;
+  --border-radius: 12px;
+  --box-shadow: 0 2px 10px rgba(23, 74, 126, 0.08);
+  padding: 4px 0;
+}
+
+/* Ajustes para telas pequenas */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 22px;
+  }
+
+  h2 {
+    font-size: 18px;
+  }
+
+  ion-card-title {
+    font-size: 16px;
+  }
+
+  ion-button[size="small"] {
+    font-size: 12px;
+  }
+}

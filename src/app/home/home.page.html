@@ -1,0 +1,181 @@
+
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Minhas Tarefas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+
+  <h1>Gerenciador de Tarefas Inteligente</h1>
+  <p>Organize suas atividades de forma simples!</p>
+
+  <ion-button expand="block" (click)="abrirFormulario()">
+    + Nova Tarefa
+  </ion-button>
+
+  <!-- Formulário para adicionar ou editar tarefas -->
+  @if (mostrarFormulario) {
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>
+          {{ idEdicao !== null ? 'Editar Tarefa' : 'Adicionar Tarefa' }}
+        </ion-card-title>
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <ion-input
+          label="Nome da tarefa"
+          labelPlacement="stacked"
+          placeholder="Digite o nome"
+          [(ngModel)]="novaTarefa">
+        </ion-input>
+
+        <ion-select
+          label="Categoria"
+          labelPlacement="stacked"
+          [(ngModel)]="categoria">
+          <ion-select-option value="Trabalho">Trabalho</ion-select-option>
+          <ion-select-option value="Estudo">Estudo</ion-select-option>
+          <ion-select-option value="Pessoal">Pessoal</ion-select-option>
+        </ion-select>
+
+        <ion-select
+          label="Prioridade"
+          labelPlacement="stacked"
+          [(ngModel)]="prioridade">
+          <ion-select-option value="Alta">Alta</ion-select-option>
+          <ion-select-option value="Média">Média</ion-select-option>
+          <ion-select-option value="Baixa">Baixa</ion-select-option>
+        </ion-select>
+
+        <ion-button expand="block" (click)="salvarTarefa()">
+          {{ idEdicao !== null ? 'Salvar Alterações' : 'Salvar Tarefa' }}
+        </ion-button>
+
+        <ion-button
+          expand="block"
+          fill="outline"
+          color="medium"
+          (click)="cancelarFormulario()">
+          Cancelar
+        </ion-button>
+
+      </ion-card-content>
+    </ion-card>
+  }
+
+  <!-- Pesquisa e filtros -->
+  <h2>Pesquisar tarefas</h2>
+
+  <ion-searchbar
+    placeholder="Pesquisar pelo nome da tarefa"
+    [(ngModel)]="pesquisa"
+    [debounce]="200">
+  </ion-searchbar>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Filtrar tarefas</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+
+      <ion-select
+        label="Categoria"
+        labelPlacement="stacked"
+        [(ngModel)]="filtroCategoria">
+        <ion-select-option value="Todas">Todas</ion-select-option>
+        <ion-select-option value="Trabalho">Trabalho</ion-select-option>
+        <ion-select-option value="Estudo">Estudo</ion-select-option>
+        <ion-select-option value="Pessoal">Pessoal</ion-select-option>
+      </ion-select>
+
+      <ion-select
+        label="Prioridade"
+        labelPlacement="stacked"
+        [(ngModel)]="filtroPrioridade">
+        <ion-select-option value="Todas">Todas</ion-select-option>
+        <ion-select-option value="Alta">Alta</ion-select-option>
+        <ion-select-option value="Média">Média</ion-select-option>
+        <ion-select-option value="Baixa">Baixa</ion-select-option>
+      </ion-select>
+
+      <ion-select
+        label="Status"
+        labelPlacement="stacked"
+        [(ngModel)]="filtroStatus">
+        <ion-select-option value="Todas">Todas</ion-select-option>
+        <ion-select-option value="Pendentes">Pendentes</ion-select-option>
+        <ion-select-option value="Concluídas">Concluídas</ion-select-option>
+      </ion-select>
+
+      <ion-button
+        expand="block"
+        fill="outline"
+        (click)="limparFiltros()">
+        Limpar Filtros
+      </ion-button>
+
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Lista de tarefas -->
+  <h2>Minhas tarefas</h2>
+
+  <p>
+    Exibindo {{ tarefasFiltradas.length }}
+    de {{ tarefas.length }} tarefas
+  </p>
+
+  @for (tarefa of tarefasFiltradas; track tarefa.id) {
+    <ion-card>
+      <ion-card-header>
+
+        <ion-card-title>
+          {{ tarefa.nome }}
+        </ion-card-title>
+
+        <ion-card-subtitle>
+          Categoria: {{ tarefa.categoria }}
+          | Prioridade: {{ tarefa.prioridade }}
+        </ion-card-subtitle>
+
+      </ion-card-header>
+
+      <ion-card-content>
+
+        <p>
+          Status:
+          {{ tarefa.concluida ? 'Concluída' : 'Pendente' }}
+        </p>
+
+        <ion-button
+          size="small"
+          color="primary"
+          (click)="editarTarefa(tarefa)">
+          Editar
+        </ion-button>
+
+        <ion-button
+          size="small"
+          color="danger"
+          (click)="excluirTarefa(tarefa.id)">
+          Excluir
+        </ion-button>
+
+        <ion-button
+          size="small"
+          [color]="tarefa.concluida ? 'medium' : 'success'"
+          (click)="alternarConclusao(tarefa)">
+          {{ tarefa.concluida ? 'Reabrir' : 'Concluir' }}
+        </ion-button>
+
+      </ion-card-content>
+    </ion-card>
+  } @empty {
+    <p>Nenhuma tarefa encontrada.</p>
+  }
+
+</ion-content>
